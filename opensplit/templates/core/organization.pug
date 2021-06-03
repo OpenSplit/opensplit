@@ -1,0 +1,42 @@
+| {% extends 'base.pug' %}
+| {% load crispy_forms_tags %}
+
+| {% block content %}
+h1.text-3xl {{org.name}}
+
+div
+    | {% for d in debts.creditor %}
+    div
+        span.bg-green-300.p-1 {{d.amount}}€
+        span.bg-gray-300.p-1 {{ d.debtor }} 
+    | {% endfor %}
+    | {% for d in debts.debtor %}
+    div
+        span.bg-red-300.p-1 {{d.amount}}€
+        span.bg-gray-300.p-1 {{ d.creditor }} 
+    | {% endfor %}
+
+//- TODO: Open Modal
+| {% include 'form.pug' %}
+
+div
+  table
+    tbody
+      tr
+        th Datum
+        th Beschreibung
+        th Bezahlt von
+        th Teilnehmer:Innen
+        th Betrag
+        th
+      | {% for exp in org.expenses.all %}
+      tr
+        td {{ exp.created_at|date:"d.m.Y" }}
+        td {{ exp.description }}
+        td {{ exp.paid_by }}
+        td {{ exp.print_participants }}
+        td {{ exp.amount }}€
+        td
+          a.text-sm.bg-red-400.rounded.p-1(href="{% url 'expense-delete' exp.id %}") DEL
+      | {% endfor %}
+| {% endblock %}

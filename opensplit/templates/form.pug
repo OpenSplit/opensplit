@@ -1,0 +1,16 @@
+form.w-full.max-w-xl.mt-10.overflow-auto(method="POST", enctype="multipart/form-data")
+  | {% csrf_token %}
+  | {% for field in form %}
+  div.fieldWrapper
+    |{{ field.label_tag }} {{ field }}
+    .text-red-600.clear {{ field.errors }}
+    //- |{% if field.help_text %}
+    //- p.help {{ field.help_text|safe }}
+    //- |{% endif %}
+  hr
+  | {% endfor %}
+  | {% if form.instance.pk %}
+  button.float-right.bg-blue-500.px-2.py-2.rounded.text-white.mt-5 Änderungen speichern
+  | {% else %}
+  button.float-right.bg-green-500.px-2.py-2.rounded.text-white.mt-5 Anlegen
+  |{% endif %}

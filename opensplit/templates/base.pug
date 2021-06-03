@@ -1,0 +1,23 @@
+| {% load static %}
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    link(rel='stylesheet' href="{% static 'css/styles.css' %}")
+    title SideProject.world
+  body
+    ul.flex.bg-gray-200
+      li.mr-10
+          a.text-posqr-logo.text-3xl.p-3(href="/") openSplit
+      | {% if user.is_authenticated %}
+      li
+        a.block.p-3(href="{% url 'logout' %}") Logout
+      | {% else %}
+      li
+        a.block.p-3(href="{% url 'login' %}") Login
+      li
+        a.block.p-3(href="{% url 'register' %}") Register
+      |{% endif %}
+
+    .max-w-screen-xl.mx-auto
+      | {% block content %}{% endblock %}

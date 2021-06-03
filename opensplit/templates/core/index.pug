@@ -1,0 +1,11 @@
+| {% extends 'base.pug' %}
+| {% block content %}
+
+.text-xl.mt-3 Deine Organisationen:
+
+div.flex
+  | {% for org in orgs %}
+  a.rounded.bg-blue-300.p-4.m-2(href="{% url 'organization' org.id %}") {{ org.name }}
+  | {% endfor %}
+
+| {% endblock %}

@@ -1,0 +1,25 @@
+@tailwind base
+@tailwind components
+@tailwind utilities
+
+.fieldWrapper
+    @apply my-4
+
+.fieldWrapper input[type="text"],
+.fieldWrapper input[type="checkbox"],
+.fieldWrapper input[type="date"],
+.fieldWrapper input[type="file"],
+.fieldWrapper input[type="email"],
+.fieldWrapper input[type="password"],
+.fieldWrapper input[type="number"],
+.fieldWrapper select
+    @apply bg-gray-100 float-right clear-both px-1 py-1 border
+
+.fieldWrapper textarea
+    @apply bg-gray-100 px-1 py-1 w-full border
+
+p.help
+    @apply text-gray-500 italic pt-3
+
+.clear
+    clear: both
