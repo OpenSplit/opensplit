@@ -1,0 +1,10 @@
+| {% extends 'base.pug' %}
+| {% block content %}
+
+.text-xl.mt-3 Willkommen
+
+| Wie wärs mit  
+a.underline.text-blue-600(href="{% url 'login' %}") einloggen?
+
+
+| {% endblock %}

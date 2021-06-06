@@ -4,20 +4,22 @@ html(lang='en')
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
     link(rel='stylesheet' href="{% static 'css/styles.css' %}")
-    title SideProject.world
+    title OpenSplit
   body
-    ul.flex.bg-gray-200
-      li.mr-10
-          a.text-posqr-logo.text-3xl.p-3(href="/") openSplit
-      | {% if user.is_authenticated %}
-      li
+    .flex.bg-gray-200
+      .flex.flex-1
+        span.text-3xl.p-3 openSplit
+        | {% if user.is_authenticated %}
+        a.p-3(href="{% url 'index' %}") Home
+        |{% endif %}
+      .flex.flex-1.justify-end
+        | {% if user.is_authenticated %}
         a.block.p-3(href="{% url 'logout' %}") Logout
-      | {% else %}
-      li
+        .float-right
+        | {% else %}
         a.block.p-3(href="{% url 'login' %}") Login
-      li
         a.block.p-3(href="{% url 'register' %}") Register
-      |{% endif %}
+        |{% endif %}
 
     .max-w-screen-xl.mx-auto
       | {% block content %}{% endblock %}

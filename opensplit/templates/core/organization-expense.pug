@@ -1,0 +1,9 @@
+| {% extends 'base.pug' %}
+| {% load crispy_forms_tags %}
+
+| {% block content %}
+h1.text-3xl.my-3 Neue Ausgabe in '{{org.name}}''
+
+| {% include "form.pug" %}
+
+| {% endblock %}

@@ -1,11 +1,15 @@
 | {% extends 'base.pug' %}
 | {% block content %}
 
-.text-xl.mt-3 Deine Organisationen:
-
+h2.text-xl.mt-3 Deine Organisationen:
+hr
 div.flex
   | {% for org in orgs %}
   a.rounded.bg-blue-300.p-4.m-2(href="{% url 'organization' org.id %}") {{ org.name }}
   | {% endfor %}
+
+h2.text-xl.mt-5 Neue Organisation anlegen:
+hr
+| {% include 'form.pug' %}
 
 | {% endblock %}

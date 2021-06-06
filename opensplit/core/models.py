@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.urls import reverse
 from opensplit.user.models import User
 from django.core.validators import MinValueValidator
 from random import shuffle
@@ -8,7 +10,11 @@ from django.db.models.signals import post_delete
 from django.dispatch import receiver
 
 class Organization(models.Model):
+    class Meta:
+        unique_together = [['name', 'owner']]
+
     name = models.CharField(max_length=40)
+    token = models.CharField(max_length=12)
     owner = models.ForeignKey(User, on_delete=models.PROTECT,related_name="+")
     member = models.ManyToManyField(User)
 
@@ -35,6 +41,11 @@ class Organization(models.Model):
                 debts["debtor"].append(d)
 
         return debts
+
+    @property
+    def invite_link(self):
+        return f"{settings.BASE_URL}{reverse('organization-join', args=(self.token,))}"
+
 
 
 class Expense(models.Model):

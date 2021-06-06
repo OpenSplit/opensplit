@@ -2,41 +2,62 @@
 | {% load crispy_forms_tags %}
 
 | {% block content %}
-h1.text-3xl {{org.name}}
+h1.text-3xl.my-3 {{org.name}}
 
+h2.text-2xl.mt-3 Member
+hr.mb-1
+label.mr-3(for="invitelink") Einladungslink: 
+input.border-2.p-1(id="invitelink",value="{{ org.invite_link }}",size=80)
+.flex 
+  | {% for member in org.member.all %}
+  span.bg-gray-300.p-1.m-1 {{ member.username }}
+  | {% endfor %}
+
+h2.text-2xl.mt-3 Schulden
+hr.mb-1
+| {% if org.debts.all|length > 0 %}
 div
-    | {% for d in debts.creditor %}
-    div
-        span.bg-green-300.p-1 {{d.amount}}€
-        span.bg-gray-300.p-1 {{ d.debtor }} 
+    | {% for d in org.debts.all %}
+    div.m-1
+        span.bg-red-300.p-1 {{d.debtor}} -> {{d.creditor}}
+        span.bg-gray-300.p-1 {{ d.amount }}€
     | {% endfor %}
-    | {% for d in debts.debtor %}
-    div
-        span.bg-red-300.p-1 {{d.amount}}€
-        span.bg-gray-300.p-1 {{ d.creditor }} 
-    | {% endfor %}
+| {% else %}
+| Alles ausgeglichen! :)
+| {% endif %}
 
-//- TODO: Open Modal
-| {% include 'form.pug' %}
+h2.text-2xl.mt-3 Aktionen
+hr.mb-1
+div.flex
+  a.bg-blue-300.p-2.m-2.rounded(href="{% url 'organization-expense' org.id %}") Neue Ausgabe
+  a.bg-blue-300.p-2.m-2.rounded(href="{% url 'organization-payment' org.id %}") Neue Überweisung
+  //- a.bg-red-300.p-2.m-2.rounded(href="{% url 'organization-leave' org.id %}") Organisation verlassen
 
+h2.text-2xl.mt-3 Transaktionen
+hr.mb-1
+{% if org.expenses.all|length > 0 %}
 div
-  table
+  table.table-auto.w-full
     tbody
-      tr
+      tr.text-left
         th Datum
         th Beschreibung
         th Bezahlt von
         th Teilnehmer:Innen
-        th Betrag
+        th.text-right Betrag
         th
       | {% for exp in org.expenses.all %}
       tr
-        td {{ exp.created_at|date:"d.m.Y" }}
+        td.p-1 {{ exp.created_at|date:"d.m.Y" }}
         td {{ exp.description }}
         td {{ exp.paid_by }}
         td {{ exp.print_participants }}
-        td {{ exp.amount }}€
-        td
+        td.text-right {{ exp.amount }}€
+        td.pl-3
+          //- a.text-sm.bg-blue-400.rounded.p-1(href="{% url 'expense-edit' exp.id %}") Edit
           a.text-sm.bg-red-400.rounded.p-1(href="{% url 'expense-delete' exp.id %}") DEL
       | {% endfor %}
+{% else %}
+span.text-xl Bis jetzt noch nix
+{% endif %}
 | {% endblock %}

@@ -1,0 +1,14 @@
+| {% extends 'base.pug' %}
+| {% block content %}
+
+.text-xl.mt-3 {{org.name}}
+
+| Du wurdest eingeladen. Einladung annehmen?
+
+form(method="POST") 
+  | {% csrf_token %}
+  button.bg-green-200.m-2.p-2(type="submit") JA!
+
+a.bg-red-200.m-2.p-2(href="/") Nein
+
+| {% endblock %}
