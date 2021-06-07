@@ -1,4 +1,4 @@
-name: GitHub Actions Demo
+name: Build and deploy
 
 on: [push]
 
@@ -8,9 +8,11 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+
       - uses: actions/setup-node@v1
         with:
           node-version: 14
+
       - run: yarn install
       - run: npm install -g gulp-cli
       - run: gulp build
@@ -27,5 +29,6 @@ jobs:
           push: true
           tags: opensplit/opensplit
           file: Dockerfile-prod
+
       - name: Trigger Portainer to update the container
         run: curl -X POST ${{ secrets.PORTAINER_WEBHOOK }}
