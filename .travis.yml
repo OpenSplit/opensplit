@@ -14,8 +14,10 @@ stages:
 jobs:
   include:
     - stage: "frontend"
-      language: node
-      python: 14
+      language: node_js
+      node_js: 14
+      before_script:
+        - npm install -g gulp-cli
       script:
         - npm install
         - gulp build
