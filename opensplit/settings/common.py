@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "Jl6PDO*hMvB]YA|Y/G_\*Y_uX02$'Pko@B^YK]cC9M\X<AB;c`(^2*)Y~B,Kwt)~"
+SECRET_KEY = "Jl6PDO*hMvB]YA|Y/G_*Y_uX02$'Pko@B^YK]cC9MX<AB;c`(^2*)Y~Bjk,Kwt)~"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "opensplit.healthz",
     "opensplit.user",
     "opensplit.core",
-    "crispy_forms"
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -71,10 +71,15 @@ TEMPLATES = [
             "loaders": [
                 (
                     "pypugjs.ext.django.Loader",
-                    ("django.template.loaders.filesystem.Loader", "django.template.loaders.app_directories.Loader",),
+                    (
+                        "django.template.loaders.filesystem.Loader",
+                        "django.template.loaders.app_directories.Loader",
+                    ),
                 )
             ],
-            "builtins": ["pypugjs.ext.django.templatetags",],
+            "builtins": [
+                "pypugjs.ext.django.templatetags",
+            ],
         },
     },
 ]
@@ -101,10 +106,18 @@ DATABASES = {
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",},
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",},
+    {
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -137,7 +150,7 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 BASE_URL = "http://localhost:8080"

@@ -1,0 +1,34 @@
+---
+services:
+  - docker
+
+git:
+  depth: false
+
+stages:
+  - frontend
+  - build
+  - name: deploy
+    if: branch = main
+
+jobs:
+  include:
+    - stage: "frontend"
+      language: node
+      python: 14
+      script:
+        - npm install
+        - gulp build
+
+    - stage: "build"
+      language: python
+      python: 3.8
+      script:
+        - docker build -t opensplit/opensplit .
+      after_success:
+        - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+        - docker push opensplit/opensplit
+
+    - stage: "deploy"
+      script:
+        - curl -X POST $PORTAINER_WEBHOOK

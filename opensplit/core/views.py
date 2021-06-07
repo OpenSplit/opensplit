@@ -24,8 +24,9 @@ def index(request):
 @login_required
 def organization(request, id):
     org = get_object_or_404(Organization, pk=id)
-    #debts = org.get_relevant_debts(request.user)
+    # debts = org.get_relevant_debts(request.user)
     return render(request, "core/organization.pug", {"org": org})
+
 
 @login_required
 def organization_join(request, token):
@@ -40,10 +41,11 @@ def organization_join(request, token):
         return redirect("organization", org.id)
     return render(request, "core/organization-join.pug", {"org": org})
 
+
 @login_required
 def organization_expense(request, id):
     org = get_object_or_404(Organization, pk=id)
-    form = ExpenseForm(org=org, initial={"paid_by":request.user})
+    form = ExpenseForm(org=org, initial={"paid_by": request.user})
     if request.method == "POST":
         form = ExpenseForm(request.POST)
         if form.is_valid():
@@ -61,10 +63,11 @@ def organization_expense(request, id):
             return redirect("organization", org.id)
     return render(request, "core/organization-expense.pug", {"org": org, "form": form})
 
+
 @login_required
 def organization_payment(request, id):
     org = get_object_or_404(Organization, pk=id)
-    form = PaymentForm(org=org, initial={"sender":request.user})
+    form = PaymentForm(org=org, initial={"sender": request.user})
     if request.method == "POST":
         form = PaymentForm(request.POST)
         if form.is_valid():
@@ -82,6 +85,7 @@ def organization_payment(request, id):
             return redirect("organization", org.id)
     return render(request, "core/organization-payment.pug", {"org": org, "form": form})
 
+
 @login_required
 def expense_delete(request, id):
     exp = get_object_or_404(Expense, pk=id)
@@ -89,13 +93,14 @@ def expense_delete(request, id):
     exp.delete()
     return redirect("organization", org.id)
 
+
 @login_required
 def expense_edit(request, id):
     exp = get_object_or_404(Expense, pk=id)
     org = exp.organization
-    form = ExpenseForm(org=org,instance=exp)
+    form = ExpenseForm(org=org, instance=exp)
     if request.method == "POST":
-        form = ExpenseForm(requst.POST, instance=exp)
+        form = ExpenseForm(request.POST, instance=exp)
         if form.is_valid():
             form.save()
         return redirect("organization", org.id)

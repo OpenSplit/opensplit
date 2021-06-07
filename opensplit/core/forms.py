@@ -1,9 +1,6 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
 
 class ExpenseForm(forms.Form):
     description = forms.CharField()
@@ -12,14 +9,16 @@ class ExpenseForm(forms.Form):
     participants = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
     def __init__(self, *args, **kwargs):
-        org = kwargs.pop('org', None)
+        org = kwargs.pop("org", None)
         super().__init__(*args, **kwargs)
         if org:
-            self.fields['paid_by'].queryset = org.member
-            self.fields['participants'].queryset = org.member
+            self.fields["paid_by"].queryset = org.member
+            self.fields["participants"].queryset = org.member
+
 
 class NewOrgForm(forms.Form):
     name = forms.CharField()
+
 
 class PaymentForm(forms.Form):
     description = forms.CharField(initial="Schuldenausgleich")
@@ -28,8 +27,8 @@ class PaymentForm(forms.Form):
     receiver = forms.ModelChoiceField(queryset=User.objects.all())
 
     def __init__(self, *args, **kwargs):
-        org = kwargs.pop('org', None)
+        org = kwargs.pop("org", None)
         super().__init__(*args, **kwargs)
         if org:
-            self.fields['sender'].queryset = org.member
-            self.fields['receiver'].queryset = org.member
+            self.fields["sender"].queryset = org.member
+            self.fields["receiver"].queryset = org.member

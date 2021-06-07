@@ -10,3 +10,5 @@ WORKDIR /code
 
 COPY requirements.txt /code/requirements.txt
 RUN python -m pip install -r requirements.txt
+
+CMD ./start.sh
