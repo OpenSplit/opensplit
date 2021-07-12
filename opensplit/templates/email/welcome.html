@@ -1,0 +1,9 @@
+<p>
+    Willkommen bei to.bike
+</p>
+
+<p>
+    Besuche den folgenden Link um deine Registrierung abzuschließen:<br />
+
+    {{ base_url }}{% url 'user-confirm' uidb64=uid token=token %}
+</p>

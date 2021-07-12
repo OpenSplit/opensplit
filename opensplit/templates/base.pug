@@ -8,10 +8,8 @@ html(lang='en')
   body
     .flex.bg-gray-200
       .flex.flex-1
-        span.text-3xl.p-3 openSplit
-        | {% if user.is_authenticated %}
-        a.p-3(href="{% url 'index' %}") Home
-        |{% endif %}
+        a.p-3(href="{% url 'index' %}")
+          span.text-3xl.p-3 openSplit
       .flex.flex-1.justify-end
         | {% if user.is_authenticated %}
         a.block.p-3(href="{% url 'logout' %}") Logout

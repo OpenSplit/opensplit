@@ -25,3 +25,7 @@ class LoginForm(forms.Form):
     helper = FormHelper()
     helper.add_input(Submit("submit", "Login", css_class="btn-primary"))
     helper.form_method = "POST"
+
+
+class PasswordResetForm(forms.Form):
+    email = forms.EmailField()

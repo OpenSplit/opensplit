@@ -14,10 +14,11 @@ class Organization(models.Model):
     class Meta:
         unique_together = [["name", "owner"]]
 
-    name = models.CharField(max_length=40)
+    name = models.CharField(max_length=60)
     token = models.CharField(max_length=12)
     owner = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
     member = models.ManyToManyField(User)
+    legacy_id = models.IntegerField(null=True)
 
     def recalculate(self):
         shares = Share.objects.filter(expense__organization=self).all()
@@ -59,6 +60,7 @@ class Expense(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     participants = models.ManyToManyField(User)
     payment = models.BooleanField(default=False)
+    legacy_id = models.IntegerField(null=True)
 
     def print_participants(self):
         return ",".join([p.username for p in self.participants.all()])
