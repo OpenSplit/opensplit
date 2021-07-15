@@ -18,7 +18,11 @@ DATABASES = {
         "PASSWORD": "django",
         "HOST": "db",
         "PORT": 3306,
-    }
+    },
+    "import": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "../opensplit.db"),
+    },
 }
 
 BASE_URL = "https://opensplit.de"
