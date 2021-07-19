@@ -13,9 +13,9 @@ class Command(BaseCommand):
     help = "Import data from the old database"
 
     def handle(self, *args, **kwargs):
-        # self.ImportUser()
-        # self.ImportGroups()
-        # self.ImportUserGroupRelation()
+        self.ImportUser()
+        self.ImportGroups()
+        self.ImportUserGroupRelation()
         self.ImportExpenses()
         self.ImportUserExpenseRelation()
 
@@ -70,6 +70,7 @@ class Command(BaseCommand):
             result = map(OrganizationRecord._make, cursor.fetchall())
             for r in result:
                 if r.group_id in [7, 11, 13, 14]:
+                    # relations for those weird groups
                     continue
                 org = Organization.objects.get(legacy_id=r.group_id)
                 user = User.objects.get(legacy_id=r.user_id)
