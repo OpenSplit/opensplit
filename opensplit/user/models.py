@@ -25,6 +25,6 @@ class User(AbstractUser):
         subject = "Passwort zurücksetzen"
         html_message = render_to_string("email/password_reset.html", context)
         plain_message = strip_tags(html_message)
-        from_email = "to.bike <no-reply@to.bike"
+        from_email = "OpenSplit <app@opensplit.de"
         to = self.email
         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)

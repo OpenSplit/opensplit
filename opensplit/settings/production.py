@@ -42,8 +42,8 @@ LOGGING = {
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USER = "app@opensplit.de"
-EMAIL_USER_PASSWORD = os.environ["EMAIL_PASS"]
 EMAIL_HOST = "mail.felixbreidenstein.de"
+EMAIL_HOST_USER = "app@opensplit.de"
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_PASS"]
 EMAIL_USE_TLS = True
-EMAIL_POST = 465
+EMAIL_POST = 587
