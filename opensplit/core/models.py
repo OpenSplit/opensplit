@@ -20,6 +20,9 @@ class Organization(models.Model):
     member = models.ManyToManyField(User)
     legacy_id = models.IntegerField(null=True)
 
+    def __str__(self):
+        return f"Org '{self.name}'"
+
     def recalculate(self):
         shares = Share.objects.filter(expense__organization=self).all()
 
@@ -61,6 +64,9 @@ class Expense(models.Model):
     participants = models.ManyToManyField(User)
     payment = models.BooleanField(default=False)
     legacy_id = models.IntegerField(null=True)
+
+    def __str__(self):
+        return f"{self.description}"
 
     def print_participants(self):
         return ",".join([p.username for p in self.participants.all()])
@@ -128,6 +134,9 @@ class Share(models.Model):
     creditor = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
     expense = models.ForeignKey(Expense, on_delete=models.CASCADE, related_name="shares")
 
+    def __str__(self):
+        return f"Split for exp. '{self.expense.id}'"
+
 
 class Debt(models.Model):
     """
@@ -138,3 +147,6 @@ class Debt(models.Model):
     debtor = models.ForeignKey(User, on_delete=models.PROTECT, related_name="my_debts")
     creditor = models.ForeignKey(User, on_delete=models.PROTECT, related_name="my_credits")
     organization = models.ForeignKey(Organization, on_delete=models.PROTECT, related_name="debts")
+
+    def __str__(self):
+        return f"Debt between {self.debtor.username} and {self.creditor.username}"
