@@ -21,6 +21,7 @@ class User(AbstractUser):
             "base_url": settings.BASE_URL,
             "uid": urlsafe_base64_encode(force_bytes(self.pk)),
             "token": default_token_generator.make_token(self),
+            "user": self,
         }
         subject = "Passwort zurücksetzen"
         html_message = render_to_string("email/password_reset.html", context)
