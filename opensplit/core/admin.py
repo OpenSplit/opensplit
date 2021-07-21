@@ -20,6 +20,7 @@ calculate_debts.short_description = "Calculate debts between members"
 
 class ExpenseAdmin(admin.ModelAdmin):
     actions = [split_expense]
+    list_display = ["description", "organization", "created_at"]
 
 
 class OrganizationAdmin(admin.ModelAdmin):

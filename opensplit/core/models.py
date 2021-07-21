@@ -8,6 +8,7 @@ from decimal import Decimal
 from .helper import OrganizationDebts
 from django.db.models.signals import post_delete
 from django.dispatch import receiver
+from datetime import datetime
 
 
 class Organization(models.Model):
@@ -60,7 +61,7 @@ class Expense(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     organization = models.ForeignKey(Organization, on_delete=models.PROTECT, related_name="expenses")
     paid_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(default=datetime.now)
     participants = models.ManyToManyField(User)
     payment = models.BooleanField(default=False)
     legacy_id = models.IntegerField(null=True)
