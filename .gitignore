@@ -1,5 +1,6 @@
 .venv/
 node_modules/
+opensplit/static/
 
 # Created by https://www.toptal.com/developers/gitignore/api/django,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,yarn

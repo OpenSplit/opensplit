@@ -9,6 +9,10 @@ task('sass', function () {
     return sass(['src/sass/*.sass'], 'src/sass/', 'opensplit/static/css', extras);
 });
 
+task('js', function () {
+    return script('src/js/script.js', 'opensplit/static/js')
+})
+
 task('clean', function () {
     return clean([
         'opensplit/static/css/**/*',
@@ -17,10 +21,11 @@ task('clean', function () {
 
 
 task('watch', function () {
-    watch(['src/sass/*'], series('sass'));
+    watch(['src/sass/*', 'tailwind.config.js'], series('sass'));
+    watch(['src/js/*'], series('js'));
 });
 
 
-task('build', series('clean', parallel('sass')));
+task('build', series('clean', parallel('sass', 'js')));
 
 task('default', series('clean', 'build', 'watch'));

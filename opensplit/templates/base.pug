@@ -6,18 +6,11 @@ html(lang='en')
     link(rel='stylesheet' href="{% static 'css/styles.css' %}")
     title OpenSplit
   body
-    .flex.bg-gray-200
-      .flex.flex-1
-        a.p-3(href="{% url 'index' %}")
-          span.text-3xl.p-3 openSplit
-      .flex.flex-1.justify-end
-        | {% if user.is_authenticated %}
-        a.block.p-3(href="{% url 'logout' %}") Logout
-        .float-right
-        | {% else %}
-        a.block.p-3(href="{% url 'login' %}") Login
-        a.block.p-3(href="{% url 'register' %}") Register
-        |{% endif %}
+    | {% include '_navbar.pug' %}
 
     .max-w-screen-xl.mx-auto
+      | {% include '_notifications.pug' %}
       | {% block content %}{% endblock %}
+
+    script(src="{% static 'js/script.js' %}")
+      

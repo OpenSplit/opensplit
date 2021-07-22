@@ -10,7 +10,7 @@ def register(request):
         form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "You registered successfully. You can log in now")
+            messages.add_message(request, messages.SUCCESS, "Anmeldung erfolgreich. Du kannst dich jetzt einloggen.")
             return redirect("login")
 
     return render(request, "user/register.pug", {"form": form})
@@ -21,6 +21,7 @@ def password_reset(request):
     if request.method == "POST":
         form = PasswordResetForm(request.POST)
         if form.is_valid():
+            messages.add_message(request, messages.SUCCESS, "Falls es einen Account mit dieser Addresse gab, haben wir dir eine EMail geschickt")
             try:
                 user = User.objects.get(email=form.cleaned_data["email"])
             except User.DoesNotExist:

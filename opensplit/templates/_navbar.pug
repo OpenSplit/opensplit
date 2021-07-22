@@ -1,0 +1,12 @@
+.flex.bg-opensplit-white
+    .flex.flex-1
+    a.p-3(href="{% url 'index' %}")
+        span.text-opensplit-logo.text-3xl.font-bold.p-3 openSplit
+    .flex.flex-1.justify-end
+    | {% if user.is_authenticated %}
+    a.block.p-3(href="{% url 'logout' %}") Logout
+    .float-right
+    | {% else %}
+    a.block.p-3(href="{% url 'login' %}") Login
+    a.block.p-3(href="{% url 'register' %}") Register
+    |{% endif %}

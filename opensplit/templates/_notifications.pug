@@ -1,0 +1,11 @@
+| {% if messages %}
+
+|{% for msg in messages %}
+.rounded.absolute.right-0.m-4.bg-opensplit-primary
+    span.inline-block.align-middle.m-2
+        {{ msg.message }}
+    button.font-semibold.absolut.right-0.top-0.text-2xl.font-semibold(onclick='closeAlert(event)')
+        span ×
+| {% endfor %}
+
+| {% endif %}
