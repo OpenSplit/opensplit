@@ -17,6 +17,7 @@ def index(request):
         if form.is_valid():
             org = Organization(name=form.cleaned_data["name"], owner=request.user, token=get_random_string(12))
             org.save()
+            org.member.add(request.user)
             return redirect("organization", org.id)
     return render(request, "core/index.pug", {"orgs": orgs, "form": form})
 
