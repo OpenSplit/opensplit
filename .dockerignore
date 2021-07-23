@@ -1,0 +1,10 @@
+node_modules/
+.git
+.gitignore
+Dockerfile*
+docker-compose.yml
+gulpfile.js
+README.md
+package.json
+yarn.lock
+tailwind.config.js
