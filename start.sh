@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#! /usr/bin/env sh
 
 ./manage.py collectstatic --no-input
 ./manage.py migrate

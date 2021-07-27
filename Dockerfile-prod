@@ -1,7 +1,10 @@
-FROM python:3
+FROM python:3-alpine
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /code 
 WORKDIR /code
 COPY . /code
-RUN python -m pip install -r requirements.txt
+RUN apk add --no-cache --virtual .build-deps gcc make linux-headers musl-dev &&\
+    apk add --no-cache mariadb-dev &&\
+    python -m pip install -r requirements.txt &&\
+    apk del .build-deps
 CMD "./start.sh"

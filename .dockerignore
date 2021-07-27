@@ -8,3 +8,6 @@ README.md
 package.json
 yarn.lock
 tailwind.config.js
+yarn-error.log
+postcss.config.js
+src
