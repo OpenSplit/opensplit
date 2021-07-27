@@ -29,6 +29,7 @@ jobs:
           push: true
           tags: opensplit/opensplit
           file: Dockerfile-prod
+          context: .
 
       - name: Trigger Portainer to update the container
         run: curl -X POST ${{ secrets.PORTAINER_WEBHOOK }}
