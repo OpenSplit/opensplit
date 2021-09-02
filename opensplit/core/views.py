@@ -57,6 +57,10 @@ def organization_leave(request, id):
         org.member.remove(request.user)
         if len(org.member.all()) == 0:
             org.delete()
+        elif org.owner == request.user:
+            org.owner = org.member.first()
+            org.save()
+
         return redirect("index")
     else:
         return HttpResponseBadRequest()
