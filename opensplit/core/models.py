@@ -59,7 +59,7 @@ class Expense(models.Model):
 
     description = models.CharField(max_length=240)
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
-    organization = models.ForeignKey(Organization, on_delete=models.PROTECT, related_name="expenses")
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, related_name="expenses")
     paid_by = models.ForeignKey(User, on_delete=models.PROTECT, related_name="+")
     created_at = models.DateTimeField(default=datetime.now)
     participants = models.ManyToManyField(User)

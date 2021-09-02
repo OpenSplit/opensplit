@@ -5,6 +5,9 @@ from .models import User
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect("index")
+
     form = RegisterForm()
     if request.method == "POST":
         form = RegisterForm(request.POST)
@@ -17,6 +20,9 @@ def register(request):
 
 
 def password_reset(request):
+    if request.user.is_authenticated:
+        return redirect("index")
+
     form = PasswordResetForm()
     if request.method == "POST":
         form = PasswordResetForm(request.POST)

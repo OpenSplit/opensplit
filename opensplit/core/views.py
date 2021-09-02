@@ -27,8 +27,8 @@ def index(request):
 def organization(request, id):
     org = get_object_or_404(Organization, pk=id)
     if request.user not in org.member.all():
-        return HttpResponseBadRequest()
-    # debts = org.get_relevant_debts(request.user)
+        return render(request, "core/organization-error.pug")
+
     return render(request, "core/organization.pug", {"org": org})
 
 
@@ -44,6 +44,22 @@ def organization_join(request, token):
         org.member.add(request.user)
         return redirect("organization", org.id)
     return render(request, "core/organization-join.pug", {"org": org})
+
+@login_required
+def organization_leave(request, id):
+    org = get_object_or_404(Organization, pk=id)
+    if request.user not in org.member.all():
+        return HttpResponseBadRequest()
+
+    debts = org.get_relevant_debts(request.user)
+    #only allow leave if the use has no debts with anybody
+    if len(debts['creditor']) == 0 and len(debts['creditor']) == 0:
+        org.member.remove(request.user)
+        if len(org.member.all()) == 0:
+            org.delete()
+        return redirect("index")
+    else:
+        return HttpResponseBadRequest()
 
 
 @login_required

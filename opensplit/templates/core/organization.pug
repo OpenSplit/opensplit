@@ -16,6 +16,7 @@ input.border-2.p-1(id="invitelink",value="{{ org.invite_link }}",size=80)
 h2.text-2xl.mt-3 Schulden
 hr.mb-1
 | {% if org.debts.all|length > 0 %}
+span.text-sm Sobald alles ausgeglichen ist, kannst du die Gruppe verlassen.
 div
     | {% for d in org.debts.all %}
     div.m-1
@@ -23,7 +24,8 @@ div
         span.bg-gray-300.p-1 {{ d.amount }}€
     | {% endfor %}
 | {% else %}
-| Alles ausgeglichen! :)
+| Alles ausgeglichen!
+a.bg-red-300.p-2.m-2.rounded(href="{% url 'organization-leave' org.id %}") Organisation verlassen
 | {% endif %}
 
 h2.text-2xl.mt-3 Aktionen
