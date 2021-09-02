@@ -1,3 +1,4 @@
+from django.http.response import HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.crypto import get_random_string
 from django.contrib.auth.decorators import login_required
@@ -25,6 +26,8 @@ def index(request):
 @login_required
 def organization(request, id):
     org = get_object_or_404(Organization, pk=id)
+    if request.user not in org.member.all():
+        return HttpResponseBadRequest()
     # debts = org.get_relevant_debts(request.user)
     return render(request, "core/organization.pug", {"org": org})
 
