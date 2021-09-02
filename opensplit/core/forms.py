@@ -4,7 +4,7 @@ from .models import User
 
 class ExpenseForm(forms.Form):
     description = forms.CharField()
-    amount = forms.DecimalField(min_value=0)
+    amount = forms.DecimalField(min_value=0, localize=True)
     paid_by = forms.ModelChoiceField(queryset=User.objects.all())
     participants = forms.ModelMultipleChoiceField(queryset=User.objects.all())
 
@@ -22,7 +22,7 @@ class NewOrgForm(forms.Form):
 
 class PaymentForm(forms.Form):
     description = forms.CharField(initial="Schuldenausgleich")
-    amount = forms.DecimalField(min_value=0)
+    amount = forms.DecimalField(min_value=0, localize=True)
     sender = forms.ModelChoiceField(queryset=User.objects.all())
     receiver = forms.ModelChoiceField(queryset=User.objects.all())
 
