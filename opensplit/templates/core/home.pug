@@ -1,16 +1,26 @@
 | {% extends 'base.pug' %}
+| {% load static %}
+
 | {% block content %}
+.text-xl.my-3 Willkommen bei OpenSplit.de
 
-.text-xl.mt-3 Willkommen
 
-| Wie wärs mit  
-a.underline.text-opensplit-link(href="{% url 'login' %}") einloggen?
+p.my-3
+    | Mit OpenSplit kannst du bei Freundesgruppen, WGs, Vereinen, etc. den Überblick
+    | behalten wenn alle abwechselnd mal eine Rechnung bezahlen. OpenSplit rechnet für
+    | dich aus wer wem weiviel Geld geben muss damit am Ende wieder alle auf 0
+    | rauskommen.
 
-div.bg-opensplit-alert.m-2.p-2.max-w-l.rounded
-    span.text-xl.font-bold.mb-4.block Hinweis
-    p.block
-        | Wenn du schon einen Account im alten OpenSplit hattest, wurde dein Account mit allen Gruppen migriert.
-        | Benutze einfach die "Passwort vergessen" Funktion um ein neues Passwort zu erhalten.
+h2.mt-5.text-xl Beispiel
+hr
+ul
+    li Person A hat gestern die Pizza für B und C bezahlt.
+    li Person B hat dafür heute die Kinotickets für alle bezahlt
+    li und Person C hat den Mietwagen geleased mit dem A und C zum Kino gefahren sind. 
+
+img.shadow-xl.mx-auto.my-5(class="w-1/2", src="{% static 'img/example.png' %}")
+
+b OpenSplit verrechnet jetzt alle Schulden zwischen zwei Personen und gibt euch am Ende ein kleines Set an Transaktionen damit alles ausgeglichen ist.
 
 
 

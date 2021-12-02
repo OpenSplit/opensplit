@@ -1,6 +1,14 @@
 | {% extends 'base.pug' %}
 
 | {% block content %}
+
+div.bg-opensplit-alert.m-2.p-2.max-w-l.rounded
+    span.text-xl.font-bold.mb-4.block Hinweis
+    p.block
+        | Wenn du schon einen Account im alten OpenSplit hattest, wurde dein Account und alle Gruppen migriert.
+        | Benutze einfach die "Passwort vergessen" Funktion um ein neues Passwort zu erhalten.
+
 | {% include 'form.pug' %}
 a.bg-red-200.rounded.p-2.m-2(href="{% url 'trigger-password-reset' %}") Passwort vergessen
+
 | {% endblock %}

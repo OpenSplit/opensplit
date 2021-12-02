@@ -13,6 +13,10 @@ task('js', function () {
     return script('src/js/script.js', 'opensplit/static/js')
 })
 
+task('img', function () {
+    return copy('src/img/*', 'opensplit/static/img')
+})
+
 task('clean', function () {
     return clean([
         'opensplit/static/css/**/*',
@@ -23,6 +27,7 @@ task('clean', function () {
 task('watch', function () {
     watch(['src/sass/*', 'tailwind.config.js'], series('sass'));
     watch(['src/js/*'], series('js'));
+    watch(['src/img/*'], series('img'));
 });
 
 

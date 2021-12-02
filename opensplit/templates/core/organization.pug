@@ -3,11 +3,11 @@
 
 | {% block content %}
 h1.text-3xl.my-3 {{org.name}}
+label.mr-3(for="invitelink") Einladungslink: 
+input.border-2.p-1(id="invitelink",value="{{ org.invite_link }}",size=80)
 
 h2.text-2xl.mt-3 Member
 hr.mb-1
-label.mr-3(for="invitelink") Einladungslink: 
-input.border-2.p-1(id="invitelink",value="{{ org.invite_link }}",size=80)
 .flex 
   | {% for member in org.member.all %}
   span.bg-gray-300.p-1.m-1 {{ member.username }}
@@ -48,7 +48,7 @@ div
         th Teilnehmer:Innen
         th.text-right Betrag
         th
-      | {% for exp in org.expenses.all %}
+      | {% for exp in org.expenses.all|slice:":25" %}
       tr
         td.p-1 {{ exp.created_at|date:"d.m.Y" }}
         td {{ exp.description }}
