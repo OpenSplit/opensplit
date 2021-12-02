@@ -28,8 +28,10 @@ def organization(request, id):
     org = get_object_or_404(Organization, pk=id)
     if request.user not in org.member.all():
         return render(request, "core/organization-error.pug")
+    
+    rel_debts = org.get_relevant_debts(request.user)
 
-    return render(request, "core/organization.pug", {"org": org})
+    return render(request, "core/organization.pug", {"org": org, "relevant_debts": rel_debts})
 
 
 @login_required
