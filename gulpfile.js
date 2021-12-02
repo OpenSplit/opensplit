@@ -31,6 +31,6 @@ task('watch', function () {
 });
 
 
-task('build', series('clean', parallel('sass', 'js')));
+task('build', series('clean', parallel('sass', 'js', 'img')));
 
 task('default', series('clean', 'build', 'watch'));
